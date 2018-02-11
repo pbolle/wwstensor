@@ -8,13 +8,17 @@ import matplotlib.dates as mdates
 plt.style.use('ggplot')
 
 # read data from csv
-data = pd.read_csv('/home/pbolle/Dokumente/weather/converted/model1.csv', usecols=['date', 'hum_in'], parse_dates=['date'])
+data = pd.read_csv('/home/pbolle/Dokumente/weather/converted/model1.csv', usecols=['date', 'hum_in', 'temp_out'],
+                   parse_dates=['date'])
 # set date as index
 data.set_index('date', inplace=True)
+
+print(data.head())
 
 # plot data
 fig, ax = plt.subplots(figsize=(15, 7))
 ax.bar(data.index, data['hum_in'])
+ax.bar(data.index, data['temp_out'])
 
 # set ticks every week
 ax.xaxis.set_major_locator(mdates.WeekdayLocator())
